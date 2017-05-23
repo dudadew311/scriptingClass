@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!--	Author: Raul Diaz
+			Date: 5/31/2016
+	-->
+	<meta charset="utf-8" />
+	<title>Raul Diaz Scripting</title>
+	<link href="default.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
+	<script src="modernizr.custom.05819.js"></script>
+	<script type="text/javascript">
+	function changePage(id) {
+		document.getElementById("page").src = "../ScriptingHomework/HandsOnProject" + id + "/index.htm"
+	}
+	function changeToPHP(id) {
+		document.getElementById("page").src = "../ScriptingHomework/php" + id + "/"
+	}
+	function changeToExtra(id) {
+		document.getElementById("page").src = "../extra/" + id
+	}
+	function renderTime() {
+		var currentTime = new Date();
+		var diem = "AM";
+		var h = currentTime.getHours();
+		var m = currentTime.getMinutes();
+   		var s = currentTime.getSeconds();
+		setTimeout('renderTime()',1000);
+   		if (h == 0) {
+			h = 12;
+		} else if (h > 12) {
+			h = h - 12;
+			diem="PM";
+		}
+		if (h < 10) {
+			h = "0" + h;
+		}
+		if (m < 10) {
+			m = "0" + m;
+		}
+		if (s < 10) {
+			s = "0" + s;
+		}
+    	var myClock = document.getElementById('clockDisplay');
+		myClock.textContent = h + ":" + m + ":" + s + " " + diem;
+		myClock.innerText = h + ":" + m + ":" + s + " " + diem;
+	}
+	renderTime();
+	</script>
+</head>
+<body>
+	<div id="header-wrapper">
+	<div id="header" class="container">
+		<div id="logo">
+			<h1><a href="#">Raul Diaz</a></h1>
+		</div>
+		<div id="clockDisplay" class="logo-2"><h1></h1></div>
+	</div>
+	</div>
+	<div id="header-featured">
+</div>
+	<div id="banner-wrapper">
+		<div id="banner" class="container">
+			<h2>Home Work Page</h2>
+			<span>Scripting Languages<br>PROFESSOR: Raymond E. Enger</br>
+	COURSE: COP 2830C
+	CRN: 32512</span>
+		</div>
+	</div>
+<div id="footer-wrapper">
+	<div id="footer" class="container">
+		<h1><center>Homework</center></h1>
+		<div class="column1">
+			<ul class="style3">
+				<li class="icon icon-ok" ><button id="1-1" class="submit" onClick="changePage(this.id)">Hands-on Project 1-1</button></li>
+				<li class="icon icon-ok" ><button id="2-1" class="submit" onClick="changePage(this.id)">Hands-on Project 2-1</button></li>
+				<li class="icon icon-ok" ><button id="3-1" class="submit" onClick="changePage(this.id)">Hands-on Project 3-1</button></li>
+			</ul>
+		</div>
+
+		<div class="column2">
+			<ul class="style3">
+				<li class="icon icon-ok" ><button id="3-2" class="submit" onClick="changePage(this.id)">Hands-on Project 3-2</button></li>
+				<li class="icon icon-ok" ><button id="4-1" class="submit" onClick="changePage(this.id)">Hands-on Project 4-1</button></li>
+				<li class="icon icon-ok" ><button id="5-1" class="submit" onClick="changePage(this.id)">Hands-on Project 5-1</button></li>
+			</ul>
+		</div>
+
+		<div class="column3">
+			<ul class="style3">
+				<li class="icon icon-ok" ><button id="5-2" class="submit" onClick="changePage(this.id)">Hands-on Project 5-2</button></li>
+				<li class="icon icon-ok" ><button id="6-1" class="submit" onClick="changePage(this.id)">Hands-on Project 6-1</button></li>
+				<li class="icon icon-ok" ><button id="7-1" class="submit" onClick="changePage(this.id)">Hands-on Project 7-1</button>
+			</ul>
+		</div>
+
+		<div class="column4">
+			<ul class="style3">
+				</li>
+				<li class="icon icon-ok" ><button id="8-1" class="submit" onClick="changePage(this.id)">Hands-on Project 8-1</button></li>
+				<li class="icon icon-check-empty" ><button id="9-1" class="submit" onClick="">Hands-on Project 9-1</button></li>
+				<li class="icon icon-check-empty" ><button id="10-1" class="submit" onClick="">Hands-on Project 10-1</button></li>
+			</ul>
+		</div>
+
+	</div>
+</div>
+<div id="footer-wrapper2">
+	<div id="footer" class="container">
+		<h1><center>Small Extra Projects</center></h1>
+		<div class="column1">
+			<ul class="style3">
+				<li class="icon icon-map-marker" ><button id="parking.html" class="submit" onClick="changeToExtra(this.id)">Parking Lot</button></li>
+				<li class="icon icon-shopping-cart" ><button id="1" class="submit" onClick="changeToPHP(this.id)">PHP invoice Extra</button></li>
+			</ul>
+		</div>
+		<div class="column2">
+			<ul class="style3">
+				<li class="icon icon-cog" ><button id="repeatAsNecessary.html" class="submit" onClick="changeToExtra(this.id)">Histogram</button></li>
+			</ul>
+		</div>
+		<div class="column3">
+			<ul class="style3">
+				<li class="icon icon-book" ><button id="shortStory.html" class="submit" onClick="changeToExtra(this.id)">A Short Story</button></li>
+			</ul>
+		</div>
+		<div class="column4">
+			<ul class="style3">
+				<li class="icon icon-question-sign" ><button id="theGrid.html" class="submit" onClick="changeToExtra(this.id)">Guess Where the Number is</button></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="showPage">
+<center>
+	<iframe id="page" src="../rdiaz479/select.htm" scrolling="yes" width="100%" height="950px" style="border:2px solid grey;"></iframe>
+<!-- <object id="page" data="../rdiaz479/select.htm" width="1400" height="950"> <embed src="../rdiaz479/select.htm" width="900" height="600"> </embed> Error: Embedded data could not be displayed. </object> -->
+</center>
+</div>
+
+</body>
+</html>

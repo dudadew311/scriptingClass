@@ -1,0 +1,76 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="no" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+         "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns = "http://www.w3.org/1999/xhtml" xml:lang="en" >
+
+<head>
+  <title>Repeat as Necessary</title>
+  	<!--
+		Author: Raul Diaz
+		Date: 2/4/2016
+		Description: Asks user for the amount of lines above and below the center and creates a histogram.
+		-->
+		<style type="text/css">
+			body {
+				text-align: center;
+				width: 100%;
+				font-size: 18px;
+			}
+
+		</style>
+	</head>
+    <body>
+    	<pre>
+    		<script type="text/javascript">
+    		function reload(){
+    			location.reload();
+    		}
+    		
+       		var userNum = window.prompt("How many lines do you want from the center?\nEnter a number between 1 and 15");
+
+       		if (userNum >= 1 && userNum <= 15){
+       			userNum = parseInt(userNum);
+       			//document.writeln("<h1>Here we go!!</h1><br/>");
+       			document.write("</br>");
+	       		
+	       		for (var i = 0; i < userNum; i++){
+	       			for(var j = 1; j <= ((userNum+1)- i); j++){
+	       				document.write("*");
+	       			}
+	       			for(var k = 0; k <= (i + (i - 1)); k++){
+	       				document.write(" ");
+	       			}
+	       			for(var l = 1; l <= ((userNum+1) - i); l++){
+	       				document.write("*");
+	       			}
+	       			document.write("<br/>");
+	       		}
+	       		document.write("*");
+	       		for(var m = 0; m < userNum; m++)
+	       			document.write("-");
+	       		for(var m = 0; m < userNum; m++)
+	       			document.write("-");
+	       		document.write("*<br/>");
+	       		for (var i = userNum; i > 0; i--){
+	       			for(var j = ((userNum+1) - i)+1; j >= 1; j--){
+	       				document.write("*");
+	       			}
+	       			for(var k = (i + (i - 1))-2; k >= 0; k--){
+	       				document.write(" ");
+	       			}
+	       			for(var l = ((userNum+1) - i)+1; l >= 1; l--){
+	       				document.write("*");
+	       			}
+	       			document.write("<br/>");
+	       		}
+       		} else {
+       			document.writeln("<h1>Entry must be a number between 1 and 15!!</h1>");
+	       	}	
+	       	document.write("<br/>");
+     
+                var relod="<button id="+"relod"+" onclick="+"reload()"+">Reload Page </button>";
+                document.write(relod);
+        	</script>
+    	</pre>
+    </body>
+</html>

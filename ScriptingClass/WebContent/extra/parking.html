@@ -1,0 +1,223 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="no" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+         "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns = "http://www.w3.org/1999/xhtml" xml:lang="en" >
+
+<head>
+  <title>Parking</title>
+    <!--
+    Author: Raul Diaz
+    Date: 2/19/2016
+    Description: Parking Lot that keeps track of how much 
+    money is Owed for the time and lets you know what the 
+    days total is. 
+    -->
+    <meta charset="utf-8" />
+    <style type="text/css">
+    .center { 
+      position: fixed;
+      width: 500px;
+      height: 200px;
+      top: 50%;
+      left: 50%;
+      margin-top: -100px; /* Negative half of height. */
+      margin-left: -250px; /* Negative half of width. */
+    }
+    </style>
+    <script type="text/javascript">
+
+    function test(){
+      return 5;
+    }
+
+    function clockIn(){
+      document.getElementById('Status').value = 'Open';
+      for (i=1; i<=5; i++)
+        document.getElementById('s'+i).value = 'Open';
+    }
+
+    function clockOut(){
+      if (s1.value == 'Open' && s2.value == 'Open' && s3.value == 'Open' && s4.value == 'Open' && s5.value == 'Open'){
+        sNo.value = ' ';
+        eTime.value = ' ';
+        aOwed.value = ' ';
+        Status.value = 'Closed';
+        for (i=1; i<=5; i++)
+          document.getElementById('s'+i).value = 'Closed';
+      }
+    }
+
+    function clearValues() {
+      sNo.value = ' ';
+      eTime.value = ' ';
+      aOwed.value = ' ';
+      tCol.value = '$0';
+      Status.value = 'Closed';
+      for (i=1; i<=5; i++)
+        document.getElementById('s'+i).value = 'Closed';
+    }
+
+    function readSpace(spaceID){
+      if (Status.value == 'Open'){
+        if (spaceID.value == 'Open'){
+          spaceID.value = 'Taken';
+          switch(spaceID)
+          {
+          case s1:
+            setTaken(1);
+            break;
+          case s2:
+            setTaken(2);
+            break;
+          case s3:
+            setTaken(3);
+            break;
+          case s4:
+            setTaken(4);
+            break;
+          case s5:
+            setTaken(5);
+            break;
+          }
+        } else {
+          spaceID.value = 'Open';
+          switch(spaceID)
+          {
+          case s1:
+            setOpen(1);
+            break;
+          case s2:
+            setOpen(2);
+            break;
+          case s3:
+            setOpen(3);
+            break;
+          case s4:
+            setOpen(4);
+            break;
+          case s5:
+            setOpen(5);
+            break;
+          }
+        }
+      }
+    }
+
+    function elapsedTime(timeIn, timeOut){
+      var minuteTime = timeOut.getSeconds() - timeIn.getSeconds();
+      var hourTime = (timeOut.getMinutes() - timeIn.getMinutes())*60;
+        getMoneyOwed(hourTime + minuteTime);
+      return hourTime + minuteTime;
+    }
+
+    function getMoneyOwed(elapsed){
+      var result;
+      var extra = 0;
+      result = parseInt(elapsed / 15);
+      if ((elapsed%15) > 0 || result == 0)
+        extra = 1;
+      aOwed.value = '$'+((extra + result) * .25).toFixed(2);
+      totalCollected += (extra + result) * .25;
+      tCol.value = '$' + totalCollected.toFixed(2);
+
+    }
+
+    function setTaken(x) {
+      array[x-1] = new Date();
+      sNo.value = x;
+      smallClearValues();
+    }
+
+    function setOpen(x) {
+      eTime.value = changeTime(elapsedTime(array[x-1], new Date()));
+      sNo.value = x;
+    }
+
+    function changeTime(min){
+      var hour;
+      var minute;
+      hour = parseInt(min / 60);
+      minute = min%60;
+      if (minute < 10)
+        minute = '0'+minute;
+      return hour + ':' + minute;
+    }
+
+    function smallClearValues() {
+      eTime.value = ' ';
+      aOwed.value = ' ';
+    }
+
+    </script>
+</head>
+<body>
+<center>
+<h1>Parking Lot</h1>
+<div style="margin-right:3mm; " >
+<form action="#" method="post" id="theForm" >
+<table 
+  style="border: 2pt solid black; " >
+  <tr>
+    <td>
+      <input type="button" value="Clock In" 
+      style="width:21mm;" onclick="clockIn()"/>
+      <input type="button" value="Clock Out" 
+      style="width:21mm;" onclick="clockOut()"/>
+      Parking Lot: 
+      <input id='Status' size="10" value="Closed" style="text-align:center;" />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <script type="text/javascript">
+        // <![CDATA[
+        var array = new Array(null, null, null, null, null);
+        var open = false;
+        var totalCollected = 0;
+
+        document.getElementById('Status').value = 'Closed';
+
+        document.writeln('<table style="border: 1pt solid black; " ><tr>');
+            for (i=1; i<=5; i++)
+            { document.write("<th>Space "+i+"</th>"); }
+        document.writeln('</tr><tr>');
+            for (i=1; i<=5; i++)
+            {
+              document.write("<th><input type='button' id='s"+i+"' name='s"+
+              i+"' value='Closed' onclick='readSpace(s"+
+              i+")' style='width:15mm;' /></th>");
+            }
+        document.writeln('</tr><tr>');
+        document.writeln('<td colspan="4" style="text-align:right;">Space #: </td>');
+        document.writeln('<td colspan="1"><input name="sNo" id="sNo" size="6" style="background-color: #ffff88; text-align: right; " /></td>');
+        document.writeln('</tr><tr>');
+        document.writeln('<td colspan="4" style="text-align:right;">Elapsed Time: </td>');
+        document.writeln('<td colspan="1"><input name="eTime" id="eTime" size="6" style="background-color: #ffff88; text-align: right; " /></td>');
+        document.writeln('</tr><tr>');
+        document.writeln('<td colspan="4" style="text-align:right;">Amount Owed: </td>');
+        document.writeln('<td colspan="1"><input name="aOwed" id="aOwed" size="6" style="background-color: #ffff88; text-align: right; " /></td>');
+        document.writeln('</tr><tr>');
+        document.writeln('<td colspan="4" style="text-align:right;">Total Collected Today: </td>');
+        document.writeln('<td colspan="1"><input name="tCol" id="tCol" size="6" style="background-color: #ffff88; text-align: right; " /></td>');
+        document.writeln('</tr></table>');
+        clearValues();
+        // ]]>
+      </script>
+    </td>
+  </tr>
+</table>
+</form>
+</div>
+<hr>
+</center>
+<div>
+  <ol class="center">
+    <li>Parking lot attendant must clock in for the parking lot to open.</li>
+    <li>A spot cost $0.25 per 15 minute segment.</li>
+    <li>We will keep track of how much money needs to be paid per spot.</li>
+    <li>We will keep track of how much money is made in total.</li>
+  </ol>
+</div>
+
+</body>
+</html>

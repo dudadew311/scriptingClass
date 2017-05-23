@@ -1,0 +1,145 @@
+<?xml version = "1.0" encoding="UTF-8" standalone="no" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+         "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns = "http://www.w3.org/1999/xhtml" xml:lang="en" >
+
+<head>
+	<meta charset = "utf-8">
+	<title>A Short Story</title>
+	<!--
+    Author: Raul Diaz
+    Date: 2/26/2016
+    Description: Tells a short story and keeps track of how often each word is used.
+    -->
+    <style type="text/css">
+    	body {
+  			background: linear-gradient(#ccc, #fff);
+  			font: 16px sans-serif;
+  			padding: 20px;
+		}
+		.letter {
+ 			background: #fff;
+  			box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  			margin: 26px auto 0;
+  			max-width: 550px;
+  			min-height: 300px;
+  			padding: 24px;
+  			position: relative;
+  			width: 80%;
+		}
+		.letter:before, .letter:after {
+  			content: "";
+  			height: 98%;
+  			position: absolute;
+  			width: 100%;
+  			z-index: -1;
+		}
+		.letter:before {
+  			background: #fafafa;
+  			box-shadow: 0 0 8px rgba(0,0,0,0.2);
+  			left: -5px;
+  			top: 4px;
+  			transform: rotate(-2.5deg);
+		}
+		.letter:after {
+  			background: #f6f6f6;
+  			box-shadow: 0 0 3px rgba(0,0,0,0.2);
+  			right: -3px;
+  			top: 1px;
+  			transform: rotate(1.4deg);
+		}
+    </style>
+	<script type="text/javascript">
+		var Word = function (wordUsed){
+			this.wordUsed = wordUsed;
+			this.times = 0;
+		};
+
+		Word.equals = function(word) {
+
+		}
+
+
+		function ran(i=5, j=0){
+			return parseInt((Math.random()*10)%i + j);
+		}
+
+
+		function makeSentence(a, n, v, p, a2, n2){
+			if (n.times == 0){
+				a = article[0];
+			} 
+			n.times += 1;
+			if (n2.times == 0){
+				a2 = article[0];
+			} 
+			a.times += 1;
+			v.times += 1;
+			p.times += 1;
+			a2.times += 1;
+			n2.times += 1;
+			var first = capFirstLetter(a);
+			return first+' '+n.wordUsed+' '+v.wordUsed+' '+p.wordUsed+' '+a2.wordUsed+' '+n2.wordUsed+other[3]; 
+		}
+
+
+		function capFirstLetter(word){
+			return word.wordUsed.charAt(0).toUpperCase()+word.wordUsed.slice(1);
+		}
+
+		var article = new Array(new Word('a'), new Word('the'), new Word('one'), new Word('some'), new Word('any'));
+		var noun = new Array(new Word('boy'), new Word('girl'), new Word('dog'), new Word('town'), new Word('car'));
+		var verb = new Array(new Word('drove'), new Word('jumped'), new Word('ran'), new Word('walked'), new Word('skipped'));
+		var preposition = new Array(new Word('to'), new Word('from'), new Word('over'), new Word('under'), new Word('on'));
+		var other = new Array("Once upon a time... ", "THE END. ", "</br>", ". ");
+
+	</script>
+</head>
+<body>
+	<div class='letter'>
+	<script type="text/javascript">
+		document.write(other[0]);	
+		for (var i = 0; i < 20; i++){
+			string = makeSentence(article[ran(4,1)], noun[ran()], verb[ran()], preposition[ran()], article[ran(4,1)], noun[ran()]);
+			document.write(string);
+		}
+
+		document.write(other[1]);
+		document.write(other[2] + other[2]);
+		document.write("Nouns: " + other[2]);
+		noun.sort(function(a,b){
+			return a.wordUsed.localeCompare(b.wordUsed);
+		});
+		for(i = 0; i<noun.length;i++ ){
+			document.write(noun[i].wordUsed+": "+noun[i].times+other[2]);
+		}
+
+		document.write(other[2]);
+		document.write("Articles:" + other[2]);
+		article.sort(function(a,b){
+			return a.wordUsed.localeCompare(b.wordUsed);
+		});
+		for(i = 0; i<article.length;i++ ){
+			document.write(article[i].wordUsed+": "+article[i].times+other[2]);
+		}
+
+		document.write(other[2]);
+		document.write("Verbs:"+other[2]);
+		verb.sort(function(a,b){
+			return a.wordUsed.localeCompare(b.wordUsed);
+		});
+		for(i = 0; i<verb.length;i++ ){
+			document.write(verb[i].wordUsed+": "+verb[i].times+other[2]);
+		}
+		document.write(other[2]);
+		document.write("Prepositions:"+other[2]);
+		preposition.sort(function(a,b){
+			return a.wordUsed.localeCompare(b.wordUsed);
+		});
+		for(i = 0; i<preposition.length;i++ ){
+			document.write(preposition[i].wordUsed+": "+preposition[i].times+other[2]);
+		}
+	</script>
+	</div>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+<html>
+   <head>
+     <meta charset = "utf-8"/> 
+       <!--Author: Raul Diaz
+           Date: 4 March 2016
+           Description: Player must try to guess the square with the Target number in least tries. 
+        -->
+     <title>The Grid</title>
+     <style type = "text/css">
+         span  { font-size: 4em;
+                 font-weight: bold;
+                 font-family: helvetica, arial, sans-serif;
+                 color: red }
+         table { border-collapse: collapse }
+         td    { 
+				 height: 5em;
+				 border: 2px solid green;
+                 width: 5em }
+		
+      </style>
+	 
+      <script type = "text/javascript">
+         <!--
+         var cells;
+         var swapped;
+		 var target = Math.floor( Math.random() * 16 + 1);
+		 
+         function setup()
+         {
+		 
+		 document.getElementById("target").innerHTML = target;
+            // create a 2d array of all the cells
+            cells = new Array(
+               [ document.getElementById( "cell00" ),
+                 document.getElementById( "cell01" ),
+                 document.getElementById( "cell02" ),
+                 document.getElementById( "cell03" ) ],
+               [ document.getElementById( "cell10" ),
+                 document.getElementById( "cell11" ),
+                 document.getElementById( "cell12" ),
+                 document.getElementById( "cell13" ) ],
+               [ document.getElementById( "cell20" ),
+                 document.getElementById( "cell21" ),
+                 document.getElementById( "cell22" ),
+                 document.getElementById( "cell23" ) ],
+               [ document.getElementById( "cell30" ),
+                 document.getElementById( "cell31" ),
+                 document.getElementById( "cell32" ),
+                 document.getElementById( "cell33" ) ] );
+            
+            placeNumbers();
+         }
+
+         function placeNumbers()
+         {
+            var numbers = new Array();
+            var randomLoc;
+            var temp;
+
+            for ( var i = 1; i <= 16 ; i++ )
+               numbers[ i ] = i;
+
+            
+            for ( i= 1; i <= 16 ; i++ )
+            {
+               randomLoc = Math.floor( Math.random() * 16 + 1);
+               temp = numbers[ i ];
+               numbers[ i ] = numbers[ randomLoc ];
+               numbers[ randomLoc ] = temp;
+            }
+
+            i = 1;
+            for ( var rows = 0; rows < 4; rows++ )
+               for ( var cols = 0; cols < 4; cols++ )
+               {
+                  if (numbers[ i ] != 0 ){
+                     cells[ rows ][ cols ].innerHTML = numbers[ i ];
+					  cells[ rows ][ cols ].style.display = "none";
+				  }
+                  else
+                     cells[ rows ][ cols ].innerHTML = "";
+
+
+                  ++i;
+               }
+         }
+			
+		var counter = 0;
+		var choice = false;
+         function doClick( row, col )
+         {
+		    obj = cells[ row ][ col ];
+			if(obj.style.display == "initial"){
+			   obj.style.display = "none";
+			   
+			}
+			else{
+			 obj.style.display = "initial";
+			 counter += 1;
+			}
+			
+			
+			if(obj.innerHTML == target){
+				if(confirm("you are a winner!!!\nTries: " + counter + "\nPlay again?")){
+					location.reload();
+				}
+				
+			}
+			
+			document.getElementById("counter").innerHTML = counter;
+			
+			
+         }
+		 
+		 function cheater(row, col){
+		 
+			for ( var rows = 0; rows < 4; rows++ ){
+				for ( var cols = 0; cols < 4; cols++ ){
+					  cells[ rows ][ cols ].style.display = "initial";
+					}
+			}
+			if(confirm("CHEATER!!!!!\nPlay again?")){
+					location.reload();
+			}
+		 }
+		 
+		 function reload(){
+			location.reload();
+		 
+		 }
+		 
+         // -->
+      </script>
+	  
+   </head>
+   <body onload = "setup()">
+    <center>
+      <table>
+         <tr>
+            <td onmousedown = "doClick(0, 0)" onmouseup = "doClick(0, 0)"><span id = "cell00" /></td>
+            <td onmousedown = "doClick(0, 1)" onmouseup = "doClick(0, 1)"><span id = "cell01" /></td>
+            <td onmousedown = "doClick(0, 2)" onmouseup = "doClick(0, 2)"><span id = "cell02" /></td>
+			<td onmousedown = "doClick(0, 3)" onmouseup = "doClick(0, 3)"><span id = "cell03" /></td>
+         </tr>
+         <tr>
+            <td onmousedown = "doClick(1, 0)" onmouseup = "doClick(1, 0)"><span id = "cell10" /></td>
+            <td onmousedown = "doClick(1, 1)" onmouseup = "doClick(1, 1)"><span id = "cell11" /></td>
+            <td onmousedown = "doClick(1, 2)" onmouseup = "doClick(1, 2)"><span id = "cell12" /></td>
+			<td onmousedown = "doClick(1, 3)" onmouseup = "doClick(1, 3)"><span id = "cell13" /></td>
+         </tr>
+         <tr>
+            <td onmousedown = "doClick(2, 0)" onmouseup = "doClick(2, 0)"><span id = "cell20" /></td>
+            <td onmousedown = "doClick(2, 1)" onmouseup = "doClick(2, 1)"><span id = "cell21" /></td>
+            <td onmousedown = "doClick(2, 2)" onmouseup = "doClick(2, 2)"><span id = "cell22" /></td>
+			<td onmousedown = "doClick(2, 3)" onmouseup = "doClick(2, 3)"><span id = "cell23" /></td>
+         </tr>
+         <tr>
+            <td onmousedown = "doClick(3, 0)" onmouseup = "doClick(3, 0)"><span id = "cell30" /></td>
+            <td onmousedown = "doClick(3, 1)" onmouseup = "doClick(3, 1)"><span id = "cell31" /></td>
+            <td onmousedown = "doClick(3, 2)" onmouseup = "doClick(3, 2)"><span id = "cell32" /></td>
+			<td onmousedown = "doClick(3, 3)" onmouseup = "doClick(3, 3)"><span id = "cell33" /></td>
+         </tr>
+      </table>
+	  <p>Target: <h2 id="target"></h2></p>
+	  <p>Try #: <h2 id="counter"></h2></p>
+<form id="form0">
+<p><input type = "button" value = "Start Over" 
+  onclick = "reload()"/>
+  
+<input type = "button" value = "End This" 
+  onclick = "cheater()" /></p>
+</form>
+
+</center>
+   </body>
+</html>
